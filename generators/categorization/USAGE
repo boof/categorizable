@@ -1,0 +1,8 @@
+Description:
+    Generates categorization migration.
+
+Example:
+    ./script/generate categorization
+
+    This will create:
+        db/migrate/20081021174922_categorization.rb
