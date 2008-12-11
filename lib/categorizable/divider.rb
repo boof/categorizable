@@ -7,7 +7,7 @@ module Categorizable
     def to_s
       @divider
     end
-    def divide(string)
+    def split(string)
       category_names = string.split @divider
       category_names.each { |name| name.strip! }
     end

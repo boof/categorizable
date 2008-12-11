@@ -12,7 +12,7 @@ Expectations do
     category_names_string = category_names * custom_divider.to_s
 
     Item.new(:category_names => category_names_string).
-        instance_eval { custom_divider.divide(self.category_names).sort }
+        instance_eval { custom_divider.split(self.category_names).sort }
   end
 
   expect [ item = Item.create(:category_names => 'Foo; Bar') ] do

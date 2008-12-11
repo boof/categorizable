@@ -5,7 +5,7 @@ module Categorizable
       collect_category_names * "#{ category_name_divider } "
     end
     def category_names=(names)
-      names = category_name_divider.divide "#{ names }"
+      names = category_name_divider.split "#{ names }"
       collection = Categorizable::Category.find_all_by_names(*names)
 
       for category in collection
