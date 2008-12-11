@@ -4,8 +4,8 @@ module Categorizable
     set_table_name 'categorizable_categories'
 
     validates_presence_of :name
-    has_many :categorizations, :class_name => 'Categorizable::Categorization'
-    has_many :categorizables, :through => :categorizations
+    has_many :categorizations, :class_name => 'Categorizable::Categorization',
+        :dependent => :delete_all
 
     def self.find_all_by_names(*names)
       find :all, :conditions => ['name IN (?)', names]
