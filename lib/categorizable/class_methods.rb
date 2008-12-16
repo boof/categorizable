@@ -7,6 +7,7 @@ module Categorizable
           :as => :categorizable, :dependent => :delete_all
       base.has_many :categories, :through => :categorizations
 
+      base.named_scope :wild_scope, proc { |scope| scope }
       base.named_scope :related_to, proc { |*names|
         names << base.base_class.name
         ids = Categorizable::Categorization.

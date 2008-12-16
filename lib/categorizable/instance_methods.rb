@@ -18,12 +18,18 @@ module Categorizable
       self.categories = collection
     end
 
-    def relatives
+    # Returns a scope to all other records that share the type and atleast one
+    # category.
+    def relatives(limit = nil)
       pk_col_name = self.class.primary_key
       pk          = self.send pk_col_name
+      scope       = {}
+      scope[:conditions] =
+          [ "#{ self.class.quoted_table_name }.#{ pk_col_name } != ?", pk ]
+      scope[:order] = 'id DESC'
+      scope[:limit] = limit if limit
 
-      self.class.related_to(*collect_category_names).all :conditions => [
-          "#{ self.class.quoted_table_name }.#{ pk_col_name } != ?", pk]
+      self.class.related_to(*collect_category_names).wild_scope scope
     end
 
     protected
